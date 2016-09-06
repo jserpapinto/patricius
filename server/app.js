@@ -8,7 +8,7 @@ let bodyParser = require('body-parser');
 
 // Routes Front e Back Office
 let routesF = require('./routes/f');
-let routesB = require('./routes/b');
+let routesB = require('./routes/backoffice');
 
 //Inicia App Express
 let app = express();
