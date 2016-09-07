@@ -2,15 +2,15 @@
 let mongoose = require("mongoose")
 let db = require("../../db")
 // Model
-let Model = require("../model/torneios")
+let Model = require("../model/tournament")
 
 // Factory Function
-const Torneios = () => {
+const Tournament = () => {
 
 	/********************************
 	*    	 PRIVATE METHODS         *
 	********************************/
-	let mountTorneio = (req) => {
+	let mountTournament = (req) => {
 		return new Model({
 			name: req.body.torneio.name,
 			img: req.body.torneio.img,
@@ -38,15 +38,15 @@ const Torneios = () => {
 	********************************/
 	let post = (req, res, next) => {
 		// Campos a inserir
-		let torneio = mountTorneio(req)
+		let tournament = mountTournament(req)
 
 		// Data validations
-		if (!torneio.name || !torneio.img) res.end("Não tem nome ou img")
+		if (!tournament.name || !tournament.img) res.end("Não tem nome ou img")
 
 		// Log
-		if (!torneio.final) console.log("Não tem final")
+		if (!tournament.final) console.log("Não tem final")
 
-		torneio.save(torneio, (err, docs) => {
+		tournament.save(tournament, (err, docs) => {
 			if (err) throw err // ou res.send(500, { error: err }) ?
 			res.end("Torneio inserido")
 		})
@@ -58,11 +58,11 @@ const Torneios = () => {
 	let put = (req, res, next) => {
 		// Campos a inserir
 		// n posso passar _id pq é imutável, portanto nao dá pra fazer new Model()
-		let torneio = Object.assign(req.body.torneio, {}) 
+		let tournament = Object.assign(req.body.torneio, {}) 
 
 		Model.findOneAndUpdate(
 			{ name: req.body.unique }, // query
-			torneio, // new doc
+			tournament, // new doc
 			{upsert: true},//options
 			(err, doc) => { // callback
 				if (err) throw err
@@ -94,4 +94,4 @@ const Torneios = () => {
 
 }
 
-module.exports = Torneios()
+module.exports = Tournament()
