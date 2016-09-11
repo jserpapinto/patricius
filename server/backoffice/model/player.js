@@ -11,6 +11,7 @@ const PlayerSchema = new Schema(
 				unique: true 
 			}
 		}, 
+		position: [String],
 		imgs: 
 		[
 			{
@@ -19,14 +20,7 @@ const PlayerSchema = new Schema(
 			}
 		], 
 		dob: Date, // Date of birth
-		cc: Number,
-		tournaments: 
-		[
-			{
-				id: Schema.Types.ObjectId,
-				teams: [Schema.Types.ObjectId]
-			}
-		]
+		cc: Number
 	}, 
 	{	// Opções
 		collection: "players",

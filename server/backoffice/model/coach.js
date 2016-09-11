@@ -3,7 +3,7 @@ let mongoose = require("mongoose")
 let Schema = mongoose.Schema
 
 //Model
-const TeamSchema = new Schema(
+const CoachSchema = new Schema(
 	{
 		name: { 
 			type: String, 
@@ -17,14 +17,16 @@ const TeamSchema = new Schema(
 				src: String,
 				order: Number
 			}
-		]
+		], 
+		dob: Date, // Date of birth
+		cc: Number
 	}, 
 	{	// Opções
-		collection: "teams",
+		collection: "coachs",
 		timestamps: true
 	}
 )
 
-let Team = mongoose.model("teams", TeamSchema)
+let Coach = mongoose.model("coachs", CoachSchema)
 
-module.exports = Team
+module.exports = Coach
