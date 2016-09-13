@@ -1,3 +1,4 @@
+"use strict"
 // Dependências
 let mongoose = require("mongoose")
 let db = require("../../db")
@@ -12,9 +13,11 @@ const Tournament = () => {
 	********************************/
 	let mountTournament = (req) => {
 		return new Model({
-			name: req.body.torneio.name,
-			img: req.body.torneio.img,
-			final: req.body.torneio.final
+			status: req.body.tournament.status,
+			name: req.body.tournament.name,
+			img: req.body.tournament.img,
+			teams: req.body.tournament.teams || null,
+			games: req.body.tournament.games || null,
 		})
 	}
 
@@ -41,10 +44,8 @@ const Tournament = () => {
 		let tournament = mountTournament(req)
 
 		// Data validations
-		if (!tournament.name || !tournament.img) res.end("Não tem nome ou img")
+		if (!tournament.name || !tournament.status) res.end("Não tem nome ou status")
 
-		// Log
-		if (!tournament.final) console.log("Não tem final")
 
 		tournament.save(tournament, (err, docs) => {
 			if (err) throw err // ou res.send(500, { error: err }) ?
@@ -94,4 +95,4 @@ const Tournament = () => {
 
 }
 
-module.exports = ()
+module.exports = Tournament()

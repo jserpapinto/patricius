@@ -1,3 +1,4 @@
+"use strict"
 // Dependências
 let mongoose = require("mongoose")
 let db = require("../../db")
