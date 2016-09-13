@@ -11,6 +11,7 @@ const PlayerSchema = new Schema(
 				unique: true 
 			}
 		}, 
+		type: [Number], // 1->Player 2->Coach 3->delegate 4->ref
 		position: [String],
 		imgs: 
 		[

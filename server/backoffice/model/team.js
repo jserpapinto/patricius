@@ -17,6 +17,11 @@ const TeamSchema = new Schema(
 				src: String,
 				order: Number
 			}
+		],
+		players: [
+			{
+				id: Schema.Types.ObjectId,
+			}
 		]
 	}, 
 	{	// Opções
