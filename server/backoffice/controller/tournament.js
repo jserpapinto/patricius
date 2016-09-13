@@ -94,4 +94,4 @@ const Tournament = () => {
 
 }
 
-module.exports = Tournament()
+module.exports = ()

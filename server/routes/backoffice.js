@@ -7,9 +7,18 @@ let tournament = require("../backoffice/controller/tournament")
 
 /* GET users listing. */
 router.get('/', (req, res) => {
+	/* Controller Dashboard */
   res.send('Admin landing page')
 })
 
+
+/********************************
+*    	  	   MENU		        *
+*	- Tournament
+*		-get types of tournament
+*	- Teams
+*	- Players
+********************************/
 
 /********************************
 *    	 	DASHBOARD        	 *
@@ -19,11 +28,6 @@ router.get('/', (req, res) => {
 ********************************/
 //router.get("/", dahsboard.get)
 
-
-	/********************************
-	*    	 DASHBOARD - MENU        *
-	*	- get types of tournament
-	********************************/
 
 
 /********************************
@@ -49,10 +53,6 @@ router.get('/', (req, res) => {
 
 /********************************
 *    	 TOURNAMENT - HOME
-*	- get last tournament from type selected
-*	- get a list of names of all the past and future tournaments
-*	from the date of current tournament
-*	- get list of arenas 
 *	- edit tournament -> edit page
 *	- add game (popup)
 *	- list games 
@@ -74,10 +74,11 @@ router.get('/', (req, res) => {
 *					- get all arenas
 *			- delete game
 ********************************/
-router.get("/torneio", tournament.get) //faltam as routes individuais de torneio
-router.post("/torneio", tournament.post)
-router.put("/torneio", tournament.put)
-router.delete("/torneio", tournament.delete)
+router.get("/tournament", tournament.getAll) //faltam as routes individuais de tournament
+router.get("/tournament/:id", tournament.getOne) // traz jogos pralem da tralha toda
+router.post("/tournament", tournament.post)
+router.put("/tournament/:id", tournament.put)
+router.delete("/tournament/:id", tournament.delete)
 
 	/********************************
 	*    	 START GAME
@@ -102,10 +103,10 @@ router.delete("/torneio", tournament.delete)
 	*	- get all events from players
 	*	- get MVP
 	********************************/
-	router.get("/torneio/jogos", tournament.get)
-	router.post("/torneio", tournament.post)
-	router.put("/torneio", tournament.put)
-	router.delete("/torneio", tournament.delete)
+	router.get("/tournament/:idTournament/:idGame", game.getOne)
+	router.post("/tournament/:idTournament/createGame", tournament.post)
+	router.put("/tournament/:idTournament/:idGame", tournament.put)
+	router.delete("/tournament/:idTournament/:idGame", tournament.delete)
 
 
 
