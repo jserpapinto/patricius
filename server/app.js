@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 *    ROUTERS        *
 *******************/
 app.use('/', routesF);
-app.use('/b', routesB);
+app.use('/backoffice', routesB);
 
 /*******************
 *       404         *

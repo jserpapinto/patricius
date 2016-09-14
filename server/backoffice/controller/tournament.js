@@ -37,6 +37,7 @@ const Tournament = () => {
 	*      INSERIR NOVO TORNEIO      *
 	********************************/
 	let post = (req, res, next) => {
+		res.send('In tournament')
 		// Campos a inserir
 		let tournament = mountTournament(req)
 
@@ -94,4 +95,4 @@ const Tournament = () => {
 
 }
 
-module.exports = ()
+module.exports = Tournament()
