@@ -38,18 +38,19 @@ const Tournament = () => {
 	********************************/
 	let post = (req, res, next) => {
 		res.send('In tournament')
+		return false
 		// Campos a inserir
 		let tournament = mountTournament(req)
 
 		// Data validations
-		if (!tournament.name || !tournament.img) res.end("Não tem nome ou img")
+		if (!tournament.name || !tournament.img) res.send("Não tem nome ou img")
 
 		// Log
 		if (!tournament.final) console.log("Não tem final")
 
 		tournament.save(tournament, (err, docs) => {
 			if (err) throw err // ou res.send(500, { error: err }) ?
-			res.end("Torneio inserido")
+			res.send("Torneio inserido")
 		})
 	}
 
