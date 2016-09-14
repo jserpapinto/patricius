@@ -48,8 +48,8 @@ const Tournament = () => {
 
 
 		tournament.save(tournament, (err, docs) => {
-			if (err) res.send(500, { error: err })
-			res.end("Torneio inserido")
+			if (err) res.send(500, { db_error: err })
+			res.end(true)
 		})
 	}
 
