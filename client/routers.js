@@ -11,6 +11,7 @@ App.config(function($routeProvider, $locationProvider) {
 			templateUrl : 'pages/tournmant.html',
 			controller  : 'tournmantController'
 		})
+
 		.otherwise({redirectTo: 'pages/home.html'})
 
 	// html5 history api
@@ -19,7 +20,7 @@ App.config(function($routeProvider, $locationProvider) {
 
 
 App.controller('mainController', function($scope) {
-	console.log("in main home");
+	console.log("in main");
 });
 
 App.controller('tournmantController', function($scope) {

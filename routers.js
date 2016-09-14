@@ -3,8 +3,8 @@ var App = angular.module('App', ['ngRoute']);
 	App.config(function($routeProvider, $locationProvider) {
 		$routeProvider
 			// route for the home page
-			.when('/front', {
-				templateUrl : 'pages/home.html',
+			.when('/tournmant', {
+				templateUrl : 'pages/tournmant.html',
 				controller  : 'otherController'
 			})
 
