@@ -16,8 +16,8 @@ const Tournament = () => {
 			status: req.body.tournament.status,
 			name: req.body.tournament.name,
 			img: req.body.tournament.img,
-			teams: req.body.tournament.teams || null,
-			games: req.body.tournament.games || null,
+			teams: req.body.tournament.teams || [],
+			games: req.body.tournament.games || [],
 		})
 	}
 
@@ -48,7 +48,7 @@ const Tournament = () => {
 
 
 		tournament.save(tournament, (err, docs) => {
-			if (err) throw err // ou res.send(500, { error: err }) ?
+			if (err) res.send(500, { error: err })
 			res.end("Torneio inserido")
 		})
 	}

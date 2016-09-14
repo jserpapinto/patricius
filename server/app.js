@@ -29,7 +29,6 @@ app.use(cookieParser());
 // Server conteúdo estático (css, js, imgs)
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 /*******************
 *    ROUTERS        *
 *******************/
