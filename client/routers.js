@@ -13,6 +13,7 @@ App.config(function($locationProvider, $routeProvider) {
 			templateUrl : '/pages/tournmant.html',
 			controller  : 'tournmantController'
 		})
+
 		.when('/tournmant/addTeam', {
 			templateUrl : '/partial/addTeam.html',
 			controller  : 'tournmantController.addTeam'
@@ -25,6 +26,7 @@ App.config(function($locationProvider, $routeProvider) {
 			templateUrl : '/pages/team.html',
 			controller  : 'teamController.getOne'
 		})
+
 		.otherwise({redirectTo: 'pages/home.html'})
 
 
@@ -32,7 +34,7 @@ App.config(function($locationProvider, $routeProvider) {
 
 
 App.controller('mainController', function($scope) {
-	console.log("in main home");
+	console.log("in main");
 });
 
 App.controller('tournmantController', function($scope) {
