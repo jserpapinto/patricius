@@ -24,9 +24,15 @@ const Tournament = () => {
 	/********************************
 	*    GET JSON DE TORNEIOS        *
 	********************************/
-	let get = (req, res, next) => {
+	let getAll = (req, res, next) => {
 		// Find all
 		Model.find({}, (err, docs) => {
+			console.log(docs)
+
+			//build with names
+			let output = docs.map((t) =>  t.name )
+			console.log(output)
+
 			// handle err
 			if (err) throw err
 
@@ -87,7 +93,7 @@ const Tournament = () => {
 	*    	  PUBLIC METHODS         *
 	********************************/
 	return {
-		get: get,
+		getAll: getAll,
 		post: post,
 		put: put,
 		delete: del

@@ -13,6 +13,12 @@ router.get('/', (req, res) => {
 })
 
 
+router.get("/tournaments", tournament.getAll) //regex pra plural
+//router.get("/tournament/:id", tournament.getOne) // traz jogos pralem da tralha toda
+//router.post("/tournament", tournament.post)
+//router.put("/tournament/:id", tournament.put)
+//router.delete("/tournament/:id", tournament.delete)
+
 /********************************
 *    	  	   MENU		        *
 *	- Tournament
@@ -75,11 +81,6 @@ router.get('/', (req, res) => {
 *					- get all arenas
 *			- delete game
 ********************************/
-//router.get("/tournament", tournament.getAll) //faltam as routes individuais de tournament
-//router.get("/tournament/:id", tournament.getOne) // traz jogos pralem da tralha toda
-router.post("/tournament", tournament.post)
-router.put("/tournament/:id", tournament.put)
-router.delete("/tournament/:id", tournament.delete)
 
 	/********************************
 	*    	 START GAME
