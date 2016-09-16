@@ -13,6 +13,8 @@ const TournamentSchema = new Schema(
 				unique: true 
 			}
 		}, 
+		type: Number,
+		date: Date,
 		imgs: 
 		[
 			{
