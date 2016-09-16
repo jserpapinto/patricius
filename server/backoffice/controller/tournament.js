@@ -88,6 +88,7 @@ const Tournament = () => {
 		//if (!tournament.name || !tournament.status || !tournament.type) res.status(401).send("Não tem nome, status ou tipo")
 
 
+
 		tournament.save(tournament, (err, docs) => {
 			if (err) res.status(500).send({error: err }).end()
 

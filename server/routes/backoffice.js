@@ -104,10 +104,12 @@ router.delete("/tournament/:id", tournament.delete)
 	*	- get all events from players
 	*	- get MVP
 	********************************/
+
 	/*router.get("/tournament/:idTournament/:idGame", game.getOne)
 	router.post("/tournament/:idTournament/createGame", tournament.post)
 	router.put("/tournament/:idTournament/:idGame", tournament.put)
 	router.delete("/tournament/:idTournament/:idGame", tournament.delete)*/
+
 
 
 
