@@ -40,11 +40,14 @@ const Tournament = () => {
 	*      INSERIR NOVO TORNEIO      *
 	********************************/
 	let post = (req, res, next) => {
+		res.send(req.body)
 		// Campos a inserir
 		let tournament = mountTournament(req)
 
 		// Data validations
+
 		if (!tournament.name || !tournament.status) res.end("Não tem nome ou status")
+
 
 
 		tournament.save(tournament, (err, docs) => {

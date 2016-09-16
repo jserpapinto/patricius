@@ -78,8 +78,8 @@ router.get('/', (req, res) => {
 //router.get("/tournament", tournament.getAll) //faltam as routes individuais de tournament
 //router.get("/tournament/:id", tournament.getOne) // traz jogos pralem da tralha toda
 router.post("/tournament", tournament.post)
-router.put("/tournament/:id", tournament.put)
-router.delete("/tournament/:id", tournament.delete)
+//router.put("/tournament/:id", tournament.put)
+//router.delete("/tournament/:id", tournament.delete)
 
 	/********************************
 	*    	 START GAME
@@ -104,10 +104,12 @@ router.delete("/tournament/:id", tournament.delete)
 	*	- get all events from players
 	*	- get MVP
 	********************************/
+
 	/*router.get("/tournament/:idTournament/:idGame", game.getOne)
 	router.post("/tournament/:idTournament/createGame", tournament.post)
 	router.put("/tournament/:idTournament/:idGame", tournament.put)
 	router.delete("/tournament/:idTournament/:idGame", tournament.delete)*/
+
 
 
 
