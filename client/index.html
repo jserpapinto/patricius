@@ -9,17 +9,20 @@
   <link rel="stylesheet" href="/dependecies/bootstrap.css" />
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
   <link rel="stylesheet" href="/css/styles.css" />
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
   <!-- Dependecies -->
   <script src="/dependecies/jquery.js"></script>
   <script src="/dependecies/angular.js"></script>
   <script src="/dependecies/angular-route.js"></script>
+  <script src="/dependecies/smart-table.min.js"></script>
   <!--<script src="/ḿodule.js"></script>-->
   <script src="/routers.js"></script>
+  <script src="/controllers/tournamentCtrl.js"></script>
 
 </head>   
 
 <!-- define angular controller -->
-<body ng-controller="mainController" class="">
+<body class="">
 <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar">
       <div class="container">
@@ -32,7 +35,7 @@
           <a class="navbar-brand" ng-href="/">Project name</a>
         </div>
         <ul class="nav navbar-nav">
-          <li><a ng-href="/tournmant">Tournaments</a></li>
+          <li><a ng-href="/tournament">Tournaments</a></li>
           <li><a href="#">Players</a></li>
           <li><a href="#">Teams</a></li>
         </ul>

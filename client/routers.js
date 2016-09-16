@@ -1,4 +1,4 @@
-var App = angular.module('App', ['ngRoute']);
+var App = angular.module('App', ['ngRoute', 'smart-table']);
 // configure routes
 App.config(function($routeProvider, $locationProvider) {
 	$routeProvider
@@ -7,9 +7,9 @@ App.config(function($routeProvider, $locationProvider) {
 			templateUrl : 'pages/home.html',
 			controller  : 'mainController'
 		})
-		.when('/tournmant', {
-			templateUrl : 'pages/tournmant.html',
-			controller  : 'tournmantController'
+		.when('/tournament', {
+			templateUrl : 'pages/tournament.html',
+			controller  : 'tournamentCtrl'
 		})
 
 		.otherwise({redirectTo: 'pages/home.html'})
@@ -22,9 +22,3 @@ App.config(function($routeProvider, $locationProvider) {
 App.controller('mainController', function($scope) {
 	console.log("in main");
 });
-
-App.controller('tournmantController', function($scope) {
-	console.log("tournmantController");
-});
-
-
