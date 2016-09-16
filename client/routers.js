@@ -42,6 +42,7 @@ App.controller('tournmantController', function($scope) {
 });
 
 App.controller('teamController', function($scope) {
+	
 	console.log("teamController");
 });
 
