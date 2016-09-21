@@ -18,7 +18,7 @@ const Tournament = () => {
 	********************************/
 
 	/********************************
-	*    GET JSON DE TORNEIOS        *
+	*    GET JSON DE TOURNAMENTS        *
 	********************************/
 	let getAll = (req, res, next) => {
 		// Find all
@@ -26,20 +26,22 @@ const Tournament = () => {
 			// handle err
 			if (err) throw err
 
-			//build with names, tipo, date, imgs
-			let output = docs.map((t) =>  {
-					let d = t.date
+			// build with names, tipo, date, imgs
+			let output = docs.map(
+				(t) =>  { // t = tournamnet
+
+					// output obj
 					let newt = {
 						id: t._id.toString(),
 						name: t.name,
-						date: moment(d, "DD/MM/YYYY"),
+						date: moment(t.date, "DD/MM/YYYY"),
 						type: t.type,
 						imgs: t.imgs
 					}
 
 					return newt
 				} 
-			);
+			)
 			console.log(output)
 
 
@@ -51,9 +53,9 @@ const Tournament = () => {
 
 	let getOne = (req, res, next) => {
 		let oneId = req.params.id
-		//find one
+		// find one
 		Model.findOne({_id: mongotypes.ObjectId(oneId)}, (err, doc) => {
-			//handle err
+			// handle err
 			if (err) throw err
 
 			res.json(doc)
@@ -62,7 +64,7 @@ const Tournament = () => {
 	}
 
 	/********************************
-	*      INSERIR NOVO TORNEIO      *
+	*      INSERIR NOVO TOURNAMENT      *
 	********************************/
 	let post = (req, res, next) => {
 
@@ -81,7 +83,6 @@ const Tournament = () => {
 			})
 		}
 		// Campos a inserir
-		console.log("POST ____ :)")
 		let tournament = mountTournament(req.body.tournament)
 
 		// Data validations
@@ -98,7 +99,7 @@ const Tournament = () => {
 
 
 	/********************************
-	*    	  UPDATE TORNEIO         *
+	*    	  UPDATE TOURNAMENT         *
 	********************************/
 
 	let put = (req, res, next) => {
@@ -114,13 +115,13 @@ const Tournament = () => {
 			{upsert: false},// options
 			(err, doc) => { // callback
 				if (err) throw err
-				res.end("Torneio atualizado")
+				res.end("TOURNAMENT atualizado")
 			}
 		)
 	}
 
 	/********************************
-	*    	  DELETE TORNEIO         *
+	*    	  DELETE TOURNAMENT         *
 	********************************/
 	let del = (req, res, next) => {
 		let delId = mongotypes.ObjectId(req.params.id)

@@ -1,0 +1,104 @@
+db.teams.insert([
+	{
+		"name": "BPI",
+		"imgs": [
+			{
+				"src": "/path/tpo/file.jpg",
+				"order": 2
+			},
+			{
+				"src": "/path/tpo/file.jpg",
+				"order": 4
+			},
+			{
+				"src": "/path/tpo/file.jpg",
+				"order": 1
+			},
+			{
+				"src": "/path/tpo/file.jpg",
+				"order": 0
+			}
+		],
+		"players": [
+			{
+				"id": new ObjectId(),
+			},
+			{
+				"id": new ObjectId(),
+			},
+			{
+				"id": new ObjectId(),
+			},
+			{
+				"id": new ObjectId(),
+			}
+		]
+	},
+	{
+		"name": "Sardoes",
+		"imgs": [
+			{
+				"src": "/path/tpo/file.jpg",
+				"order": 1
+			},
+			{
+				"src": "/path/tpo/file.jpg",
+				"order": 3
+			},
+			{
+				"src": "/path/tpo/file.jpg",
+				"order": 1
+			},
+			{
+				"src": "/path/tpo/file.jpg",
+				"order": 12
+			}
+		],
+		"players": [
+			{
+				"id": new ObjectId(),
+			},
+			{
+				"id": new ObjectId(),
+			},
+			{
+				"id": new ObjectId(),
+			},
+			{
+				"id": new ObjectId(),
+			}
+		]
+	},
+])
+
+db.teams.find().pretty()
+
+
+{
+	"team": {
+   		"name": "BPI",
+   		"imgs": [
+   			{
+   				"id": "57e1d4d9564db6ea3b1134a1"
+   			},
+   			{
+   				"id": "57e1d4d9364db6ea3b1134a1"
+   			},
+   			{
+   				"id": "57e1d4d9514db6ea3b1134a1"
+   			}
+   		],
+   		"players": [
+   			{
+   				"id": "57e1d4d9514db6ea3b1134a1"
+   			},
+   			{
+   				"id": "57e1d4d4114db6ea3b1134a1"
+   			},
+   			{
+   				"id": "57e1d449514db6ea3b1134a1"
+   			}
+   		]
+
+	}
+}

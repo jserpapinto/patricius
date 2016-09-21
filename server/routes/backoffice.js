@@ -5,6 +5,8 @@ let router = express.Router()
 
 // Controllers
 let tournament = require("../backoffice/controller/tournament")
+let team = require("../backoffice/controller/team")
+let player = require("../backoffice/controller/player")
 
 /* GET users listing. */
 router.get('/', (req, res) => {
@@ -17,6 +19,18 @@ router.get("/tournament/:id", tournament.getOne) // traz jogos pralem da tralha 
 router.post("/tournament", tournament.post)
 router.put("/tournament/:id", tournament.put)
 router.delete("/tournament/:id", tournament.delete)
+
+router.get("/teams", team.getAll)
+router.get("/team/:id", team.getOne)
+router.post("/team", team.post)
+router.put("/team/:id", team.put)
+router.delete("/team/:id", team.delete)
+
+router.get("/players", player.getAll)
+router.get("/player/:id", player.getOne)
+router.post("/player", player.post)
+router.put("/player/:id", player.put)
+router.delete("/player/:id", player.delete)
 
 /********************************
 *    	  	   MENU		        *
