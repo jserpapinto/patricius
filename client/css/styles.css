@@ -13,13 +13,38 @@
 body {
 	background-color:white;
 	font-family: 'PT Sans', sans-serif;
+	background:url("../assets/grass.jpg");
+}
+
+td, tr {
+	border: 0;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {border:0px;}
+
+
+.g-format {
+	color: #da1a1a;
+    font-size: 21px;
+    margin-left: 8px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+span {
+	font-size: 13px;
+    font-weight: 600;
+}
+
+.filname{
+	padding-left: 12px;
 }
 
 .basic {
 	border: 2px solid #e8e8e8;
 	border-bottom: 4px solid #e8e8e8;
 	border-radius: 4px;
-	background-color: #f7f7f7;
+	background-color: rgba(247, 247, 247, 0.9);
 	padding:15px;
 }
 
@@ -30,5 +55,26 @@ body {
   margin-bottom: 35px;
 }
 
+.form-search {
+	max-width: 86%;
+    float: right;
+    margin-top: 9px;
+}
+
+.i-search {
+	font-size: 18px;
+    padding-top: 17px;
+    padding-left: 8px;
+}
+
+.action-btns {
+	text-align: center;
+}
+
+.r-btn {
+	display: inline-block;
+}
 
 /* # 02 - Tournemant Geral */
+
+

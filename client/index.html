@@ -15,9 +15,12 @@
   <script src="/dependecies/angular.js"></script>
   <script src="/dependecies/angular-route.js"></script>
   <script src="/dependecies/smart-table.min.js"></script>
-  <!--<script src="/ḿodule.js"></script>-->
+  <!-- Main app -->
   <script src="/routers.js"></script>
+  <!-- Controllers -->
   <script src="/controllers/tournamentCtrl.js"></script>
+  <script src="/controllers/teamsCtrl.js"></script>
+  <script src="/controllers/playersCtrl.js"></script>
 
 </head>   
 
@@ -36,8 +39,8 @@
         </div>
         <ul class="nav navbar-nav">
           <li><a ng-href="/tournament">Tournaments</a></li>
-          <li><a href="#">Players</a></li>
-          <li><a href="#">Teams</a></li>
+          <li><a ng-href="/players">Players</a></li>
+          <li><a ng-href="/teams">Teams</a></li>
         </ul>
       </div>
     </nav>

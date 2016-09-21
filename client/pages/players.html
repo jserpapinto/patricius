@@ -1,0 +1,48 @@
+<div class="container basic">
+  <h1>Listagem de todas os jogadores</h1>
+  <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+    <thead>
+    <tr>
+      <th st-sort="firstName">Nome</th>
+      <th st-sort="birthDate">Data de nascimento</th>
+      <th st-sort="balance">Imagem</th>
+      <th st-sort="team">Equipa Atual</th>
+    </tr>
+    <tr>
+      <th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="row in displayedCollection" data-id="{{row.id}}">
+      <td>{{row.name}}</td>
+      <td>{{row.date}}</td>
+      <td>{{row.image}}</td>
+      <td>{{row.team}}</td>
+      <td>
+      <button type="button" ng-click="removeRow()" id={{row.id}} class="btn btn-sm btn-danger">
+        <i class="glyphicon glyphicon-remove">
+        </i>
+      </button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="text" class="form-control" name="name" ng-model="name" />          
+      </td>
+      <td>
+        <input type="text" class="form-control" name="date" ng-model="date" />          
+      </td>
+      <td>
+        <input type="text" class="form-control" name="image" ng-model="image" />          
+      </td>
+      <td>
+        <input type="text" class="form-control" name="team" ng-model="team" />   <!-- TODO: Dropdown w/ teams-->       
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <button type="button" ng-click="addRow()" class="btn btn-sm btn-success">
+    <i class="glyphicon glyphicon-plus">
+    </i> Add random item
+  </button>
+</div>

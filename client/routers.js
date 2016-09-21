@@ -11,6 +11,14 @@ App.config(function($routeProvider, $locationProvider) {
 			templateUrl : 'pages/tournament.html',
 			controller  : 'tournamentCtrl'
 		})
+		.when('/teams', {
+			templateUrl : 'pages/teams.html',
+			controller : 'teamsCtrl'
+		})
+		.when('/players', {
+			templateUrl : 'pages/players.html',
+			controller : 'playersCtrl'
+		})
 
 		.otherwise({redirectTo: 'pages/home.html'})
 
@@ -21,4 +29,14 @@ App.config(function($routeProvider, $locationProvider) {
 
 App.controller('mainController', function($scope) {
 	console.log("in main");
+});
+
+App.directive('customOnChange', function() {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      var onChangeFunc = scope.$eval(attrs.customOnChange);
+      element.bind('change', onChangeFunc);
+    }
+  };
 });
