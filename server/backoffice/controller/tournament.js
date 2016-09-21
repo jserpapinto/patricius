@@ -1,9 +1,14 @@
 "use strict"
 // Dependências
 let mongoose = require("mongoose")
+let mongotypes = mongoose.Types	
 let db = require("../../db")
+let moment = require("moment")
 // Model
 let Model = require("../model/tournament")
+
+// Date configs
+moment.locale('pt-PT');
 
 // Factory Function
 const Tournament = () => {
@@ -11,75 +16,123 @@ const Tournament = () => {
 	/********************************
 	*    	 PRIVATE METHODS         *
 	********************************/
-	let mountTournament = (req) => {
-		return new Model({
-			status: req.body.tournament.status,
-			name: req.body.tournament.name,
-			img: req.body.tournament.img,
-			teams: req.body.tournament.teams || [],
-			games: req.body.tournament.games || [],
-		})
-	}
 
 	/********************************
-	*    GET JSON DE TORNEIOS        *
+	*    GET JSON DE TOURNAMENTS        *
 	********************************/
-	let get = (req, res, next) => {
+	let getAll = (req, res, next) => {
 		// Find all
 		Model.find({}, (err, docs) => {
 			// handle err
 			if (err) throw err
 
+			// build with names, tipo, date, imgs
+			let output = docs.map(
+				(t) =>  { // t = tournamnet
+
+					// output obj
+					let newt = {
+						id: t._id.toString(),
+						name: t.name,
+						date: moment(t.date, "DD/MM/YYYY"),
+						type: t.type,
+						imgs: t.imgs
+					}
+
+					return newt
+				} 
+			)
+			console.log(output)
+
+
 			// resposta
-			res.json(docs)
+			res.json(output)
+			res.end()
+		})
+	}
+
+	let getOne = (req, res, next) => {
+		let oneId = req.params.id
+		// find one
+		Model.findOne({_id: mongotypes.ObjectId(oneId)}, (err, doc) => {
+			// handle err
+			if (err) throw err
+
+			res.json(doc)
 			res.end()
 		})
 	}
 
 	/********************************
-	*      INSERIR NOVO TORNEIO      *
+	*      INSERIR NOVO TOURNAMENT      *
 	********************************/
 	let post = (req, res, next) => {
+
+		// constroi novo modelo para inserir
+		let mountTournament = (t) => { // t = tournament
+			console.log(t)
+			return new Model({
+				status: t.status || null,
+				name: t.name || null,
+				type: t.type || null,
+				date: moment(t.date) || new Date(), // poe data em iso
+				imgs: t.img || [],
+				teams: t.teams || [],
+				games: t.games || [],
+				created_at: new Date(),
+			})
+		}
 		// Campos a inserir
-		let tournament = mountTournament(req)
+		let tournament = mountTournament(req.body.tournament)
 
 		// Data validations
-		if (!tournament.name || !tournament.status) res.end("Não tem nome ou status")
+		//if (!tournament.name || !tournament.status || !tournament.type) res.status(401).send("Não tem nome, status ou tipo")
+
 
 
 		tournament.save(tournament, (err, docs) => {
+<<<<<<< HEAD
 			if (err) res.send(500, { db_error: err })
 			res.end(true)
+=======
+			if (err) res.status(500).send({error: err }).end()
+
+			res.status(200).send(true)
+>>>>>>> b3a51278b3ffa9dd38a26cadb582b29ff6944c06
 		})
 	}
 
+
 	/********************************
-	*    	  UPDATE TORNEIO         *
+	*    	  UPDATE TOURNAMENT         *
 	********************************/
+
 	let put = (req, res, next) => {
+		// get id
+		let updateId = mongotypes.ObjectId(req.params.id)
 		// Campos a inserir
 		// n posso passar _id pq é imutável, portanto nao dá pra fazer new Model()
-		let tournament = Object.assign(req.body.torneio, {}) 
+		let t = Object.assign(req.body.tournament, {}) 
 
 		Model.findOneAndUpdate(
-			{ name: req.body.unique }, // query
-			tournament, // new doc
-			{upsert: true},//options
+			{ _id: updateId }, // query
+			t, // new doc
+			{upsert: false},// options
 			(err, doc) => { // callback
 				if (err) throw err
-				res.end("Torneio atualizado")
+				res.end("TOURNAMENT atualizado")
 			}
 		)
 	}
 
 	/********************************
-	*    	  DELETE TORNEIO         *
+	*    	  DELETE TOURNAMENT         *
 	********************************/
 	let del = (req, res, next) => {
-		let name = req.body.torneio.name
-		Model.remove({ name: name }, (err) => {
+		let delId = mongotypes.ObjectId(req.params.id)
+		Model.remove({ _id: delId }, (err) => {
 			if (err) throw err
-			res.send("Torneio apagado")
+			res.status(200).send(true)
 		})
 	}
 
@@ -87,7 +140,8 @@ const Tournament = () => {
 	*    	  PUBLIC METHODS         *
 	********************************/
 	return {
-		get: get,
+		getAll: getAll,
+		getOne: getOne,
 		post: post,
 		put: put,
 		delete: del

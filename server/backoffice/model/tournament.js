@@ -4,7 +4,7 @@ let mongoose = require("mongoose")
 let Schema = mongoose.Schema
 
 //Model
-const TorneioSchema = new Schema(
+const TournamentSchema = new Schema(
 	{
 		status: Boolean,
 		name: { 
@@ -13,6 +13,8 @@ const TorneioSchema = new Schema(
 				unique: true 
 			}
 		}, 
+		type: Number,
+		date: Date,
 		imgs: 
 		[
 			{
@@ -33,11 +35,11 @@ const TorneioSchema = new Schema(
 		]
 	}, 
 	{	// Opções
-		collection: "torneios",
+		collection: "tournament",
 		timestamps: true
 	}
 )
 
-let Torneio = mongoose.model("torneios", TorneioSchema)
+let Tournament = mongoose.model("tournament", TournamentSchema)
 
-module.exports = Torneio
+module.exports = Tournament
