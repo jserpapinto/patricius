@@ -91,14 +91,9 @@ const Tournament = () => {
 
 
 		tournament.save(tournament, (err, docs) => {
-<<<<<<< HEAD
-			if (err) res.send(500, { db_error: err })
-			res.end(true)
-=======
 			if (err) res.status(500).send({error: err }).end()
 
 			res.status(200).send(true)
->>>>>>> b3a51278b3ffa9dd38a26cadb582b29ff6944c06
 		})
 	}
 
