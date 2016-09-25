@@ -2,60 +2,61 @@
 // Dependências
 let mongoose = require("mongoose")
 let mongotypes = mongoose.Types	
-let db = require("../../db")
-let moment = require("moment")
+let db = require("../../../db")
 // Model
-let Model = require("../model/tournament")
-
-// Date configs
-moment.locale('pt-PT');
+let Model = require("../model/team")
 
 // Factory Function
-const Tournament = () => {
+const Team = () => {
 
 	/********************************
 	*    	 PRIVATE METHODS         *
 	********************************/
+	let mountTeam = (equipa) => {
+	}
 
 	/********************************
-	*    GET JSON DE TOURNAMENTS        *
+	*    GET JSON DE TEAMS        *
 	********************************/
 	let getAll = (req, res, next) => {
-		// Find all
 		Model.find({}, (err, docs) => {
 			// handle err
-			if (err) throw err
+			if (err) throw err;
 
-			// build with names, tipo, date, imgs
+			// build with name, img0
 			let output = docs.map(
-				(t) =>  { // t = tournamnet
-
+				(t) => { // t = team
+					// get only 1st image
+					let profileImg = t.imgs.find((img) => {
+							if (img.order == Math.min.apply(Math, t.imgs.map((img) => img.order)))
+								return img.src
+						}
+					)
+					if (Array.isArray(profileImg)) profileImg = profileImg[0] // se devolver >1 resultado
 					// output obj
 					let newt = {
 						id: t._id.toString(),
 						name: t.name,
-						date: moment(t.date, "DD/MM/YYYY"),
-						type: t.type,
-						imgs: t.imgs
+						img: profileImg,
 					}
 
 					return newt
-				} 
+				}
 			)
 			console.log(output)
-
 
 			// resposta
 			res.json(output)
 			res.end()
+
 		})
 	}
 
 	let getOne = (req, res, next) => {
 		let oneId = req.params.id
+		console.log(oneId)
 		// find one
 		Model.findOne({_id: mongotypes.ObjectId(oneId)}, (err, doc) => {
-			// handle err
 			if (err) throw err
 
 			res.json(doc)
@@ -64,51 +65,37 @@ const Tournament = () => {
 	}
 
 	/********************************
-	*      INSERIR NOVO TOURNAMENT      *
+	*      INSERIR NOVO TEAM      *
 	********************************/
 	let post = (req, res, next) => {
 
-		// constroi novo modelo para inserir
-		let mountTournament = (t) => { // t = tournament
-			console.log(t)
-			return new Model({
-				status: t.status || null,
-				name: t.name || null,
-				type: t.type || null,
-				date: moment(t.date) || new Date(), // poe data em iso
-				imgs: t.img || [],
-				teams: t.teams || [],
-				games: t.games || [],
-				created_at: new Date(),
-			})
-		}
-		// Campos a inserir
-		let tournament = mountTournament(req.body.tournament)
+		let t = req.body.team
+		// handle requirements
+		if (t.name == undefined || t.name == "") return res.send({error:"Nome não preenche requisitos"})
 
-		// Data validations
-		//if (!tournament.name || !tournament.status || !tournament.type) res.status(401).send("Não tem nome, status ou tipo")
+		// mount new team
+		let team = new Model({
+			name: t.name,
+			imgs: t.imgs || null,
+			players: t.players || null
+		})
 
-
-
-		tournament.save(tournament, (err, docs) => {
-
-			if (err) res.status(500).send({error: err }).end()
+		team.save(team, (err, docs) => {
+			if (err) return res.status(500).send({error: err }).end()
 
 			res.status(200).send(true)
 		})
 	}
 
-
 	/********************************
-	*    	  UPDATE TOURNAMENT         *
+	*    	  UPDATE TEAM         *
 	********************************/
-
 	let put = (req, res, next) => {
 		// get id
 		let updateId = mongotypes.ObjectId(req.params.id)
 		// Campos a inserir
 		// n posso passar _id pq é imutável, portanto nao dá pra fazer new Model()
-		let t = Object.assign(req.body.tournament, {}) 
+		let t = Object.assign(req.body.team, {}) 
 
 		Model.findOneAndUpdate(
 			{ _id: updateId }, // query
@@ -116,13 +103,13 @@ const Tournament = () => {
 			{upsert: false},// options
 			(err, doc) => { // callback
 				if (err) throw err
-				res.end("TOURNAMENT atualizado")
+				res.end("TEAM atualizada")
 			}
 		)
 	}
 
 	/********************************
-	*    	  DELETE TOURNAMENT         *
+	*    	  DELETE TEAM         *
 	********************************/
 	let del = (req, res, next) => {
 		let delId = mongotypes.ObjectId(req.params.id)
@@ -145,4 +132,4 @@ const Tournament = () => {
 
 }
 
-module.exports = Tournament()
+module.exports = Team()
