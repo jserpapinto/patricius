@@ -1,0 +1,47 @@
+body {
+    width: 100%;
+    height: 100%;
+    /*padding-top ideal seria 110->player page*/
+    padding-top: 70px;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+@media (min-width:767px) {
+    .navbar {
+        padding: 20px 0;
+        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        transition: background .5s ease-in-out,padding .5s ease-in-out;
+    }
+
+    .top-nav-collapse {
+        padding: 0;
+    }
+}
+
+section{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.p-after-h2 {
+    margin-top: 50px;
+}
+
+.footer-section {
+    text-align: center;
+    background: #eee;
+}
+
+/*FOOOOOOOOOOOTER*/
+footer {
+    margin: 50px 0;
+}

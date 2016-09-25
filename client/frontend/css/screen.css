@@ -1,0 +1,219 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 1, ../sass/sass/_global.scss */
+body {
+  width: 100%;
+  height: 100%;
+  /*padding-top ideal seria 110->player page*/
+  padding-top: 70px;
+}
+
+/* line 8, ../sass/sass/_global.scss */
+html {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 13, ../sass/sass/_global.scss */
+.no-padding {
+  padding: 0;
+}
+
+@media (min-width: 767px) {
+  /* line 18, ../sass/sass/_global.scss */
+  .navbar {
+    padding: 20px 0;
+    -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+    -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+    transition: background .5s ease-in-out,padding .5s ease-in-out;
+  }
+
+  /* line 25, ../sass/sass/_global.scss */
+  .top-nav-collapse {
+    padding: 0;
+  }
+}
+/* line 30, ../sass/sass/_global.scss */
+section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+/* line 35, ../sass/sass/_global.scss */
+.p-after-h2 {
+  margin-top: 50px;
+}
+
+/* line 39, ../sass/sass/_global.scss */
+.footer-section {
+  text-align: center;
+  background: #eee;
+}
+
+/*FOOOOOOOOOOOTER*/
+/* line 45, ../sass/sass/_global.scss */
+footer {
+  margin: 50px 0;
+}
+
+/* line 1, ../sass/sass/_index.scss */
+.tournament-section {
+  overflow: hidden;
+  text-align: center;
+  background: #eee;
+}
+
+/* line 7, ../sass/sass/_index.scss */
+.about-section {
+  text-align: center;
+  background: url("../images/backgrounds/2.jpg") 50% 0 fixed;
+  background-size: cover;
+}
+
+/* line 13, ../sass/sass/_index.scss */
+.sponsor-section {
+  overflow: hidden;
+  text-align: center;
+  background: #FFFFFF;
+}
+
+/*image carrousel -- header*/
+/* line 20, ../sass/sass/_index.scss */
+.carousel-control .glyphicon-menu-right,
+.carousel-control .glyphicon-menu-left {
+  position: absolute;
+  top: 50%;
+  font-size: 40px;
+}
+
+/* line 27, ../sass/sass/_index.scss */
+.carousel-control .glyphicon-menu-right {
+  right: 30%;
+}
+
+/* line 30, ../sass/sass/_index.scss */
+.carousel-control .glyphicon-menu-left {
+  left: 30%;
+}
+
+/* line 34, ../sass/sass/_index.scss */
+.carousel,
+.item,
+.active {
+  height: 100%;
+}
+
+/* line 40, ../sass/sass/_index.scss */
+.carousel-inner {
+  height: 100%;
+}
+
+/* Background images are set within the HTML using inline CSS, not here */
+/* line 46, ../sass/sass/_index.scss */
+.fill {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+/*End image Carousel*/
+/*Owl carousel*/
+/* line 58, ../sass/sass/_index.scss */
+#owl-demo .item {
+  margin: 3px;
+}
+
+/* line 61, ../sass/sass/_index.scss */
+#owl-demo .item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/*end owl*/
+/*TORNEIO-ITEM*/
+/* line 71, ../sass/sass/_index.scss */
+.tournament-item {
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+/*PLAYER PAGE*/
+/*PLAYER-ITEM*/
+/* line 4, ../sass/sass/_player.scss */
+.slide-image {
+  width: 100%;
+}
+
+/* line 8, ../sass/sass/_player.scss */
+.carousel-holder {
+  margin-bottom: 30px;
+}
+
+/* line 12, ../sass/sass/_player.scss */
+#myCarousel
+.carousel-control,
+.item {
+  border-radius: 4px;
+  background: transparent;
+}
+
+/* line 19, ../sass/sass/_player.scss */
+.caption {
+  height: 130px;
+  overflow: hidden;
+}
+
+/* line 24, ../sass/sass/_player.scss */
+.caption h4 {
+  white-space: nowrap;
+}
+
+/* line 28, ../sass/sass/_player.scss */
+.thumbnail img {
+  width: 100%;
+}
+
+/* line 32, ../sass/sass/_player.scss */
+.ratings {
+  padding-right: 10px;
+  padding-left: 10px;
+  color: #d17581;
+}
+
+/* line 38, ../sass/sass/_player.scss */
+.thumbnail {
+  padding: 0;
+}
+
+/* line 42, ../sass/sass/_player.scss */
+.thumbnail .caption-full {
+  padding: 9px;
+  color: #333;
+}
+
+/*TEAM-ITEM*/
+/* line 2, ../sass/sass/_team.scss */
+.img-team-center {
+  margin: 0 auto;
+}
+
+/*GAME PAGE*/
+/*player-ITEM*/
+/* line 4, ../sass/sass/_game.scss */
+.img-goal {
+  height: 25px;
+  width: 25px;
+}
+
+/*TIMELINE*/
+/* line 11, ../sass/sass/_game.scss */
+.list-group-item, .list-group {
+  overflow: hidden;
+}
