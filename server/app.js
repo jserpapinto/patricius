@@ -8,8 +8,8 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 
 // Routes Front e Back Office
-let routesF = require('./routes/f');
-let routesB = require('./routes/backoffice');
+let routesF = require('./app_server/routes/f');
+let routesB = require('./app_server/routes/backoffice');
 
 //Inicia App Express
 let app = express();
@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Trata cookies (?)
 app.use(cookieParser());
 // Server conteúdo estático (css, js, imgs)
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'app_server', 'public')));
 
 /*******************
 *    ROUTERS        *
