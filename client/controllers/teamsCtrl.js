@@ -23,8 +23,10 @@ App.controller('teamsCtrl',['$scope', '$http' , function($scope, $http) {
 		teams.team.type = this.type;
 		teams.team.date = this.date;
 
+		// This line should be inside POST success Function
 		$scope.rowCollection.push({ 'name': teams.team.name	,'image': teams.team.image, 'date' : teams.team.date });
 		/*$http.post("http://127.0.0.1:3000/backoffice/teams", teams).success(function(data, status){
+		
 		}).error(function(){
 			console.log("herro"); // TODO: slice rowCollection
 		})	*/

@@ -1,4 +1,4 @@
-<div class="container basic">
+<div class="container basic" >
   <h1>Listagem de todos os torneios</h1>
     <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
       <thead>
@@ -20,10 +20,10 @@
         <td>{{row.date}}</td>
         <td></td>
         <td class="action-btns">
-          <button type="button" ng-click="" id={{row.id}} class="btn btn-sm btn-success r-btn">
+          <a  ng-click="" ng-href="tournament/{{row.id}}" id={{row.id}} class="btn btn-sm btn-success r-btn">
             <i class="glyphicon glyphicon-cog">
             </i>
-          </button>
+          </a>
           <button type="button" ng-click="" id={{row.id}} class="btn btn-sm btn-warning r-btn">
             <i class="glyphicon glyphicon-pencil">
             </i>
@@ -36,7 +36,7 @@
       </tr>
       </tbody>
     </table>
-  <form name="myForm" class="my-form">
+  <form name="tournament.uploadForm" class="my-form" id="myForm" enctype="multipart/form-data" >
     <table class="table">
       <thead>
         <tr>
@@ -56,13 +56,13 @@
           </td>
           <td>
             <label class="btn btn-default btn-file">
-          Browse Image<input type="file" name="img" ng-model="img"  custom-on-change="uploadFile" style="display: none;">
+          Browse Image<input type="file" ngf-select  name="img" ng-model="file" ngf-pattern="'image/*" accept="'image/*" ngf-max-size="5MB" custom-on-change="uploadFile" style="display: none;">
             </label>
             <span ng-show="found"><i class="glyphicon glyphicon-exclamation-sign g-format"></i>Wrong Format</span> 
             <span class="filname" ng-show="filename && !found">{{filename}}</span>   
           </td>
           <td>
-            <button type="button" ng-click="addRow()" class="btn btn-sm btn-success">
+            <button type="button" ng-click="addRow();"  class="btn btn-sm btn-success">
               <i class="glyphicon glyphicon-plus">
               </i>
             </button>

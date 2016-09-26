@@ -1,4 +1,4 @@
-var App = angular.module('App', ['ngRoute', 'smart-table']);
+var App = angular.module('App', ['ngRoute', 'smart-table', 'ngFileUpload']);
 // configure routes
 App.config(function($routeProvider, $locationProvider) {
 	$routeProvider
@@ -9,7 +9,12 @@ App.config(function($routeProvider, $locationProvider) {
 		})
 		.when('/tournament', {
 			templateUrl : 'pages/tournament.html',
-			controller  : 'tournamentCtrl'
+			controller  : 'tournamentCtrl',
+			controllerAs: 'tournament'
+		})
+		.when('/tournament/:id', {
+			templateUrl : 'pages/tournament.html',
+			controller  : 'singleTournamentCtrl'
 		})
 		.when('/teams', {
 			templateUrl : 'pages/teams.html',
