@@ -2,7 +2,7 @@
 // Dependências
 let mongoose = require("mongoose")
 let mongotypes = mongoose.Types	
-let db = require("../../../db")
+let db = require("../../db")
 let moment = require("moment")
 let multer = require("multer")
 // Model

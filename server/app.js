@@ -6,6 +6,8 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
+// db connection 
+require('./app_server/db')
 
 // Routes Front e Back Office
 let routesF = require('./app_server/routes/f');
