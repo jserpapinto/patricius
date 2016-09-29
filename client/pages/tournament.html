@@ -56,10 +56,10 @@
           </td>
           <td>
             <label class="btn btn-default btn-file">
-          Browse Image<input type="file" ngf-select  name="img" ng-model="file" ngf-pattern="'image/*" accept="'image/*" ngf-max-size="5MB" custom-on-change="uploadFile" style="display: none;">
+          Browse Image<input type="file"  name="img" ng-model="img" accept="image/x-png, image/gif, image/jpeg" custom-on-change="uploadFile" style="display: none;">
             </label>
-            <span ng-show="found"><i class="glyphicon glyphicon-exclamation-sign g-format"></i>Wrong Format</span> 
-            <span class="filname" ng-show="filename && !found">{{filename}}</span>   
+            <span ng-show="!imageFound && touched"><i class="glyphicon glyphicon-exclamation-sign g-format"></i>Wrong Format</span>
+            <span ng-show="imageFound">{{filename}}</span>
           </td>
           <td>
             <button type="button" ng-click="addRow();"  class="btn btn-sm btn-success">
