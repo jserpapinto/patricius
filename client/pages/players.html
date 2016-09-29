@@ -25,22 +25,31 @@
       </button>
       </td>
     </tr>
-    <tr>
-      <td>
-        <input type="text" class="form-control" name="name" ng-model="name" />          
-      </td>
-      <td>
-        <input type="text" class="form-control" name="date" ng-model="date" />          
-      </td>
-      <td>
-        <input type="text" class="form-control" name="image" ng-model="image" />          
-      </td>
-      <td>
-        <input type="text" class="form-control" name="team" ng-model="team" />   <!-- TODO: Dropdown w/ teams-->       
-      </td>
-    </tr>
     </tbody>
   </table>
+  <form name="playerForm" class="my-form" id="playerForm" enctype="multipart/form-data">
+    <table>
+      <thead>
+        <tr>Add</tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <input type="text" class="form-control" name="name" ng-model="name" />          
+        </td>
+        <td>
+          <input type="text" class="form-control" name="date" ng-model="date" />          
+        </td>
+        <td>
+          <input type="text" class="form-control" name="image" ng-model="image" />          
+        </td>
+        <td>
+          <input type="text" class="form-control" name="team" ng-model="team" />   <!-- TODO: Dropdown w/ teams-->       
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
   <button type="button" ng-click="addRow()" class="btn btn-sm btn-success">
     <i class="glyphicon glyphicon-plus">
     </i> Add random item

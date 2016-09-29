@@ -64,7 +64,7 @@ App.controller('tournamentCtrl',['$scope', '$http', 'Upload', function($scope, $
 		var file = img.currentTarget.files[0];
 	  
 	  Upload.upload({
-	      url: 'http://192.168.1.66:3000/backoffice/tournament/upload', //webAPI exposed to upload the img
+	      url: 'http://127.0.0.1:3000/backoffice/tournament/upload', //webAPI exposed to upload the img
 	      method: 'PUT',
 	      data:{img:file} //pass img as data, should be user ng-model
   		}).then(function (resp) { 

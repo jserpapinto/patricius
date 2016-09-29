@@ -6,16 +6,16 @@ App.controller('playersCtrl',['$scope', '$http' , function($scope, $http) {
 	
 	var players = {
 		player : {
+			id: "",
 			name: "",
 			date: "",
 			image: ""
 		}
 	};
 	
-	// Get all tournaments //
-	/*$http.get("http://127.0.0.1:3000/backoffice/tournaments").success(function( data ) {
+	$http.get("http://127.0.0.1:3000/backoffice/players").success(function( data ) {
 		$scope.rowCollection = data;
-	});	*/
+	});	
 
 	// Add new tournament //
 	$scope.addRow = function(){
@@ -24,12 +24,11 @@ App.controller('playersCtrl',['$scope', '$http' , function($scope, $http) {
 		players.player.date = this.date;
 
 		// This line should be inside POST success Function
-		$scope.rowCollection.push({ 'name': players.player.name	,'image': players.player.image, 'date' : players.player.date });
-		/*$http.post("http://127.0.0.1:3000/backoffice/teams", teams).success(function(data, status){
-		
+		$http.post("http://127.0.0.1:3000/backoffice/players", players).success(function(data, status){
+			$scope.rowCollection.push({ 'name': players.player.name	,'image': players.player.image, 'date' : players.player.date });
 		}).error(function(){
 			console.log("herro"); // TODO: slice rowCollection
-		})	*/
+		})	
 	}
 
 	/*$scope.removeRow = function(){
