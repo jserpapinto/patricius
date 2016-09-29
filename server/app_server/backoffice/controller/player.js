@@ -71,7 +71,7 @@ const Player = () => {
 		let types = [1,2,3,4]
 		let err = ""
 		if (t.name == undefined || t.name == "") err += "Nome não preenche requisitos.\n"
-		if (t.cc == undefined || !Number.isInteger(t.cc) || t.cc > 9999999 || t.cc < 1000000) err += "CC tem de ter 7 números.\n"
+		if (t.cc == undefined || !Number.isInteger(t.cc) || t.cc < 9999999 || t.cc > 1000000) err += "CC tem de ter 7 números.\n"
 		if (t.dob == undefined || !moment(t.dob)) err += "DOB tem de ser uma data (ex: '22/11/1998') em string.\n"
 		if (t.type == undefined || !Number.isInteger(t.type) || types.indexOf(t.type) == -1) err += "Tipo tem de ser um número entre 1-4.\n"
 		if (err !== "") return res.send(err)

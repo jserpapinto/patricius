@@ -48,7 +48,7 @@ const GameSchema = new Schema(
 		},
 		status: Boolean, // se ainda esta ativo
 		bestPlayer: Schema.Types.ObjectId
-			}
+	}
 )
 
 let Player = mongoose.model("players", PlayerSchema)
