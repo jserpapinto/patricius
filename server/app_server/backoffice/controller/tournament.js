@@ -79,7 +79,7 @@ const Tournament = () => {
 				date: moment(t.date) || new Date(), // poe data em iso
 				teams: t.teams || [],
 				games: t.games || [],
-				created_at: new Date(),
+				created_at: new Date()
 			})	
 		}
 		// Campos a inserir
@@ -90,11 +90,11 @@ const Tournament = () => {
 
 
 
-		tournament.save(tournament, (err, docs) => {
+		tournament.save(tournament, (err, doc) => {
 
 			if (err) res.status(500).send({error: err }).end()
 
-			res.status(200).send(true)
+			res.status(200).send({"id": doc._id.toString()})
 		})
 	}
 	let postManyImgs = (req, res, next) => {

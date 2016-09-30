@@ -72,8 +72,8 @@ const Player = () => {
 
 		let player = req.body.player
 		
-		// mount new team
-		let team = new Model({
+		// mount new player
+		player = new Model({
 			name: player.name,
 			type: player.type,
 			position: player.position,
