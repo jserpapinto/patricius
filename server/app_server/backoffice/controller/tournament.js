@@ -74,10 +74,11 @@ const Tournament = () => {
 		let mountTournament = (t) => { // t = tournament
 
 			// handle img
-			console.log(t.img.content.exec(/^data:image\/(jpeg|png);base64,/),'oooooooiiiiiiii')
-			return false
-			let base64Img = t.img.content.replace(/^data:image\/\w;base64,/, "")
-			require("fs").writeFile(path.join(__dirname, "../../../public/imgs/players/ou2t.png"), base64Img, 'base64', function(err) {
+			let match = /^data:image\/(jpeg|png);base64,/.exec(t.img.content)
+			console.log(match[1],"oiiiiiiiiiiiiiii")
+			let base64Img = t.img.content.replace(/^data:image\/(jpg|png);base64,/, "")
+			let imgName = moment().format() + "." + match[1]
+			require("fs").writeFile(path.join(__dirname, "../../../public/imgs/players/" + imgName), base64Img, 'base64', function(err) {
 			  console.log(err, "<--- ERRO ");
 			});
 
@@ -92,7 +93,7 @@ const Tournament = () => {
 			})	
 		}
 		// Campos a inserir
-			console.log(req.body)
+			//console.log(req.body)
 		let tournament = mountTournament(req.body.tournament)
 
 		// Data validations
