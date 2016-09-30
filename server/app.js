@@ -33,8 +33,8 @@ app.use(function(req, res, next) {
 // Mostra os pedidos no terminal
 app.use(logger('dev'));
 //  Faz parse do body em pedidos POST e PUT para poder-mos aceder como json
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({ extended: false },{limit: '50mb'}));
 // Trata cookies (?)
 app.use(cookieParser());
 // Server conteúdo estático (css, js, imgs)

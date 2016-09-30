@@ -23,31 +23,34 @@ const Team = () => {
 			// handle err
 			if (err) throw err;
 
-			// build with name, img0
-			let output = docs.map(
-				(t) => { // t = team
-					// get only 1st image
-					let profileImg = t.imgs.find((img) => {
-							if (img.order == Math.min.apply(Math, t.imgs.map((img) => img.order)))
-								return img.src
+			if (docs) {
+				// build with name, img0
+				let output = docs.map(
+					(t) => { // t = team
+						// get only 1st image
+						let profileImg = t.imgs.find((img) => {
+								if (img.order == Math.min.apply(Math, t.imgs.map((img) => img.order)))
+									return img.src
+							}
+						)
+						if (Array.isArray(profileImg)) profileImg = profileImg[0] // se devolver >1 resultado
+						// output obj
+						let newt = {
+							id: t._id.toString(),
+							name: t.name,
+							img: profileImg,
 						}
-					)
-					if (Array.isArray(profileImg)) profileImg = profileImg[0] // se devolver >1 resultado
-					// output obj
-					let newt = {
-						id: t._id.toString(),
-						name: t.name,
-						img: profileImg,
+
+						return newt
 					}
+				)
+				console.log(output)
 
-					return newt
-				}
-			)
-			console.log(output)
-
-			// resposta
-			res.json(output)
-			res.end()
+				// resposta
+				res.json(output)
+				res.end()
+			}
+			else return res.status(200).res.send("Não tem equipas")
 
 		})
 	}
