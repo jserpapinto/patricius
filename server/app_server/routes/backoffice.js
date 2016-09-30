@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 /**************
 *	Tournaments
 ***************/
-router.get("/tournaments", tournament.getAll) //regex pra plural
+router.get("/tournaments", tournament.getAll) // regex pra plural
 router.get("/tournament/:id", tournament.getOne) // traz jogos pralem da tralha toda
 
 router.post("/tournament", tournament.post)

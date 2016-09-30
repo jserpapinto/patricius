@@ -10,19 +10,44 @@ const PlayerSchema = new Schema(
 			type: String, 
 			index: { 
 				unique: true 
-			}
+			},
+			required: true,
+			lowercase: true,
+			trim: true
 		}, 
-		type: [Number], // 1->Player 2->Coach 3->delegate 4->ref
-		position: [String],
+		type: {
+			type: [Number], // 1->Player 2->Coach 3->delegate 4->ref
+			required: true,
+			min: 1,
+			max: 4
+		},
+		position: {
+			type: [String],
+			lowercase: true,
+			trim: true
+		},
 		imgs: 
 		[
 			{
-				src: String,
-				order: Number
+				src: {
+					type: String,
+					lowercase: true,
+					trim: true,
+					default: 'default.png'
+				},
+				primary: {
+					type: Boolean,
+					default: false
+				}
 			}
 		], 
-		dob: Date, // Date of birth
-		cc: Number
+		dob: { 
+			type: Date, // Date of birth
+			required: true
+		},
+		cc: {
+			type: Number
+		}
 	}, 
 	{	// Opções
 		collection: "players",
