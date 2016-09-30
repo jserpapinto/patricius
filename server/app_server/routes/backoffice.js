@@ -29,7 +29,7 @@ router.post("/tournament", tournament.post)
 // upload img tournament
 var storage = multer.diskStorage({ //multers disk storage settings
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '../public/imgs/tournaments/'))
+        cb(null, path.join(__dirname, '../../public/imgs/tournaments/'))
     },
     filename: function (req, file, cb) {
         var datetimestamp = Date.now();
@@ -68,9 +68,29 @@ router.delete("/team/:id", team.delete)
 /**************
 *	Players
 ***************/
+
+// upload img tournament
+var storage2 = multer.diskStorage({ //multers disk storage settings
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, '../../public/imgs/players/'))
+    },
+    filename: function (req, file, cb) {
+        var datetimestamp = Date.now();
+        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
+    }
+});
+var upload2 = multer({ //multer settings
+    storage: storage,
+    fileFilter: function (req, file, cb) {
+	    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) { //
+	       return cb(new Error('Only image files are allowed!'));
+	    }
+	    cb(null, true);
+  	}
+}).single('img') // field name from frontend
 router.get("/players", player.getAll)
 router.get("/player/:id", player.getOne)
-router.post("/player", player.post)
+router.post("/player", upload2, player.post)
 router.put("/player/:id", player.put)
 router.delete("/player/:id", player.delete)
 

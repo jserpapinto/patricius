@@ -18,16 +18,18 @@ const Player = () => {
 
 			// build with name, img0
 			let output = docs.map(
-				(t) => { // t = team
-					// get only 1st image
+				(p) => { // p = player
+
+					// get primary image
 					let profileImg = t.imgs.find((img) => {
-							if (img.order == Math.min.apply(Math, t.imgs.map((img) => img.order)))
+							if (img.primary == true) // marked as true
 								return img.src
 						}
 					)
+
 					if (Array.isArray(profileImg)) profileImg = profileImg[0] // se devolver >1 resultado
 					// output obj
-					let newt = {
+					let newPlayer = {
 						id: t._id.toString(),
 						name: t.name,
 						type: t.type, // 1->Player 2->Coach 3->delegate 4->ref
@@ -37,7 +39,7 @@ const Player = () => {
 						img: profileImg,
 					}
 
-					return newt
+					return newPlayer
 				}
 			)
 			console.log(output)
@@ -51,11 +53,13 @@ const Player = () => {
 
 	let getOne = (req, res, next) => {
 		let oneId = req.params.id
-		console.log(oneId)
+		console.log('ID recebido pelo url', oneId)
 		// find one
 		Model.findOne({_id: mongotypes.ObjectId(oneId)}, (err, doc) => {
-			if (err) throw err
 
+			if (err) return res.status(500).send({error: err}).end() // returning error and ending
+
+			console.log('Doc do player a enviar na resposta', doc)
 			res.json(doc)
 			res.end()
 		})
@@ -66,30 +70,22 @@ const Player = () => {
 	********************************/
 	let post = (req, res, next) => {
 
-		let t = req.body.player
-		// handle requirements
-		let types = [1,2,3,4]
-		let err = ""
-		if (t.name == undefined || t.name == "") err += "Nome não preenche requisitos.\n"
-		if (t.cc == undefined || !Number.isInteger(t.cc) || t.cc < 9999999 || t.cc > 1000000) err += "CC tem de ter 7 números.\n"
-		if (t.dob == undefined || !moment(t.dob)) err += "DOB tem de ser uma data (ex: '22/11/1998') em string.\n"
-		if (t.type == undefined || !Number.isInteger(t.type) || types.indexOf(t.type) == -1) err += "Tipo tem de ser um número entre 1-4.\n"
-		if (err !== "") return res.send(err)
+		let player = req.body.player
 		
 		// mount new team
 		let team = new Model({
-			name: t.name,
-			type: t.type,
-			position: t.position,
-			dob: t.dob,
-			cc: t.cc,
-			imgs: t.imgs || null
+			name: player.name,
+			type: player.type,
+			position: player.position,
+			dob: player.dob,
+			cc: player.cc,
+			imgs: player.imgs || null
 		})
 
-		team.save(team, (err, docs) => {
-			if (err) return res.status(500).send({error: err }).end()
+		team.save(player, (err, docs) => {
+			if (err) return res.status(500).send({error: err}).end() // returning error and ending
 
-			res.status(200).send(true)
+			res.status(200).send(true) // everything good, 200 OK
 		})
 	}
 
@@ -99,17 +95,18 @@ const Player = () => {
 	let put = (req, res, next) => {
 		// get id
 		let updateId = mongotypes.ObjectId(req.params.id)
-		// Campos a inserir
+
 		// n posso passar _id pq é imutável, portanto nao dá pra fazer new Model()
-		let t = Object.assign(req.body.player, {}) 
+		let player = Object.assign(req.body.player, {}) 
 
 		Model.findOneAndUpdate(
 			{ _id: updateId }, // query
-			t, // new doc
+			player, // new doc
 			{upsert: false},// options
 			(err, doc) => { // callback
-				if (err) throw err
-				res.end("Player atualizado")
+				if (err) return res.status(500).send({error: err}).end() // returning error and ending
+
+				res.status(200).send(true) // everything good, 200 OK
 			}
 		)
 	}
@@ -120,8 +117,9 @@ const Player = () => {
 	let del = (req, res, next) => {
 		let delId = mongotypes.ObjectId(req.params.id)
 		Model.remove({ _id: delId }, (err) => {
-			if (err) throw err
-			res.status(200).send(true)
+			if (err) return res.status(500).send({error: err}).end() // returning error and ending
+
+			res.status(200).send(true) // everything good, 200 OK
 		})
 	}
 
