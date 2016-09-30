@@ -24,12 +24,12 @@ router.get('/', (req, res) => {
 router.get("/tournaments", tournament.getAll) // regex pra plural
 router.get("/tournament/:id", tournament.getOne) // traz jogos pralem da tralha toda
 
-router.post("/tournament", tournament.post)
 
 // upload img tournament
 var storage = multer.diskStorage({ //multers disk storage settings
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, '../../public/imgs/tournaments/'))
+        console.log(file)
     },
     filename: function (req, file, cb) {
         var datetimestamp = Date.now();
@@ -46,10 +46,12 @@ var upload = multer({ //multer settings
   	}
 }).single('img') // field name from frontend
 // route
-router.put("/tournament/upload", upload, tournament.putImg)
+router.put("/tournament/upload", tournament.putImg)
 // .upload img tournament
 
-router.put("/tournament/:id", tournament.put)
+router.post("/tournament", tournament.post)
+
+router.put("/tournament/:id", upload, tournament.put)
 router.delete("/tournament/:id", tournament.delete)
 
 

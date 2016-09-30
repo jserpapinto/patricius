@@ -5,6 +5,7 @@ let mongotypes = mongoose.Types
 let db = require("../../db")
 let moment = require("moment")
 let multer = require("multer")
+let path = require("path")
 // Model
 let Model = require("../model/tournament")
 
@@ -71,7 +72,15 @@ const Tournament = () => {
 
 		// constroi novo modelo para inserir
 		let mountTournament = (t) => { // t = tournament
-			console.log(t)
+
+			// handle img
+			console.log(t.img.content.exec(/^data:image\/(jpeg|png);base64,/),'oooooooiiiiiiii')
+			return false
+			let base64Img = t.img.content.replace(/^data:image\/\w;base64,/, "")
+			require("fs").writeFile(path.join(__dirname, "../../../public/imgs/players/ou2t.png"), base64Img, 'base64', function(err) {
+			  console.log(err, "<--- ERRO ");
+			});
+
 			return new Model({
 				status: t.status || null,
 				name: t.name || null,
@@ -83,16 +92,15 @@ const Tournament = () => {
 			})	
 		}
 		// Campos a inserir
+			console.log(req.body)
 		let tournament = mountTournament(req.body.tournament)
 
 		// Data validations
 		//if (!tournament.name || !tournament.status || !tournament.type) res.status(401).send("Não tem nome, status ou tipo")
 
-
-
 		tournament.save(tournament, (err, doc) => {
 
-			if (err) res.status(500).send({error: err }).end()
+			if (err) return res.status(500).send({error: err }).end()
 
 			res.status(200).send({"id": doc._id.toString()})
 		})
