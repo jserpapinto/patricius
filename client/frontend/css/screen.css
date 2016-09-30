@@ -79,8 +79,15 @@ footer {
   background: #FFFFFF;
 }
 
+/* line 19, ../sass/sass/_index.scss */
+.textBox {
+  background: rgba(240, 240, 240, 0.5);
+  padding-bottom: 25px;
+  padding-top: 25px;
+}
+
 /*image carrousel -- header*/
-/* line 20, ../sass/sass/_index.scss */
+/* line 27, ../sass/sass/_index.scss */
 .carousel-control .glyphicon-menu-right,
 .carousel-control .glyphicon-menu-left {
   position: absolute;
@@ -88,30 +95,30 @@ footer {
   font-size: 40px;
 }
 
-/* line 27, ../sass/sass/_index.scss */
+/* line 34, ../sass/sass/_index.scss */
 .carousel-control .glyphicon-menu-right {
   right: 30%;
 }
 
-/* line 30, ../sass/sass/_index.scss */
+/* line 37, ../sass/sass/_index.scss */
 .carousel-control .glyphicon-menu-left {
   left: 30%;
 }
 
-/* line 34, ../sass/sass/_index.scss */
+/* line 41, ../sass/sass/_index.scss */
 .carousel,
 .item,
 .active {
   height: 100%;
 }
 
-/* line 40, ../sass/sass/_index.scss */
+/* line 47, ../sass/sass/_index.scss */
 .carousel-inner {
   height: 100%;
 }
 
 /* Background images are set within the HTML using inline CSS, not here */
-/* line 46, ../sass/sass/_index.scss */
+/* line 53, ../sass/sass/_index.scss */
 .fill {
   width: 100%;
   height: 100%;
@@ -124,12 +131,12 @@ footer {
 
 /*End image Carousel*/
 /*Owl carousel*/
-/* line 58, ../sass/sass/_index.scss */
+/* line 65, ../sass/sass/_index.scss */
 #owl-demo .item {
   margin: 3px;
 }
 
-/* line 61, ../sass/sass/_index.scss */
+/* line 68, ../sass/sass/_index.scss */
 #owl-demo .item img {
   display: block;
   width: 100%;
@@ -138,7 +145,7 @@ footer {
 
 /*end owl*/
 /*TORNEIO-ITEM*/
-/* line 71, ../sass/sass/_index.scss */
+/* line 78, ../sass/sass/_index.scss */
 .tournament-item {
   margin-bottom: 25px;
   margin-top: 25px;
