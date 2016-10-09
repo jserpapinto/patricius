@@ -4,7 +4,7 @@ let mongoose = require("mongoose")
 let mongotypes = mongoose.Types	
 let db = require("../../db")
 // Model
-let Model = require("../model/team")
+let Model = mongoose.model('Team')
 
 // Factory Function
 const Team = () => {

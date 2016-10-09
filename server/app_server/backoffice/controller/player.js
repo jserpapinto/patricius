@@ -3,7 +3,7 @@
 let mongoose = require("mongoose")
 let db = require("../../db")
 // Model
-let Model = require("../model/player")
+let Model = mongoose.model('Player')
 
 // Factory Function
 const Player = () => {

@@ -7,7 +7,7 @@ let moment = require("moment")
 let multer = require("multer")
 let path = require("path")
 // Model
-let Model = require("../model/tournament")
+let Model = mongoose.model('Tournament')
 
 // Date configs
 moment.locale('pt-PT');

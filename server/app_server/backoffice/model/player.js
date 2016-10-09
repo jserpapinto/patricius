@@ -55,6 +55,5 @@ const PlayerSchema = new Schema(
 	}
 )
 
-let Player = mongoose.model("players", PlayerSchema)
+mongoose.model("Player", PlayerSchema)
 
-module.exports = Player

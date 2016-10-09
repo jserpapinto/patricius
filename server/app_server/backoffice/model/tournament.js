@@ -76,9 +76,8 @@ const TournamentSchema = new Schema({
 }, 
 {	// Opções
 	collection: "tournament",
-		timestamps: true
+	timestamps: true
 })
 
-let Tournament = mongoose.model("tournament", TournamentSchema)
+mongoose.model("Torunament", TournamentSchema)
 
-module.exports = Tournament

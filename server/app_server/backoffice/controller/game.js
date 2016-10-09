@@ -6,7 +6,7 @@ let db = require("../../db")
 let moment = require("moment")
 let multer = require("multer")
 // Model
-let Model = require("../model/game")
+let Model = mongoose.model('Tournament')
 
 // Date configs
 moment.locale('pt-PT');
