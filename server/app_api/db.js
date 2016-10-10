@@ -3,7 +3,10 @@
 let mongoose = require("mongoose")
 
 // Connection
-let dbURI = 'mongodb://localhost/patricius'; //'mongodb://patricius:password@ds019766.mlab.com:19766/patricius_db'
+let dbURI = 'mongodb://patuser:patpass@ds049456.mlab.com:49456/patricius' //'mongodb://localhost/patricius'
+if (process.env.NODE_ENV === 'production') { // if in production
+	dbURI = 'mongodb://patuser:patpass@ds049456.mlab.com:49456/patricius'
+}
 mongoose.connect(dbURI)
 
 // connection logs

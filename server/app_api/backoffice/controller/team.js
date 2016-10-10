@@ -2,69 +2,55 @@
 // Dependências
 let mongoose = require("mongoose")
 let mongotypes = mongoose.Types	
-let db = require("../../db")
 // Model
-let Model = mongoose.model('Team')
+let Model = require('../model/team')
+
+// Helper
+let H = require('./helper')
 
 // Factory Function
 const Team = () => {
 
-	/********************************
-	*    	 PRIVATE METHODS         *
-	********************************/
-	let mountTeam = (equipa) => {
-	}
 
 	/********************************
 	*    GET JSON DE TEAMS        *
 	********************************/
 	let getAll = (req, res, next) => {
-		Model.find({}, (err, docs) => {
-			// handle err
-			if (err) throw err;
+		// Find all
+		Model
+			.find({})
+			.select('name imgs')
+			.exec((err, teamList) => {
+				// Err -> Bd bad request
+				if (err) return H.responde(res, 400, err)
 
-			if (docs) {
-				// build with name, img0
-				let output = docs.map(
-					(t) => { // t = team
-						// get only 1st image
-						let profileImg = t.imgs.find((img) => {
-								if (img.order == Math.min.apply(Math, t.imgs.map((img) => img.order)))
-									return img.src
-							}
-						)
-						if (Array.isArray(profileImg)) profileImg = profileImg[0] // se devolver >1 resultado
-						// output obj
-						let newt = {
-							id: t._id.toString(),
-							name: t.name,
-							img: profileImg,
-						}
+				if (!teamList || teamList === 0) {
+					return H.responde(res, 404, {
+						"msg": "Não há equipas na bd."
+					})
+				}
 
-						return newt
-					}
-				)
-				console.log(output)
-
-				// resposta
-				res.json(output)
-				res.end()
-			}
-			else return res.status(200).res.send("Não tem equipas")
-
-		})
+				return H.responde(res, 200, teamList)
+			})
 	}
 
 	let getOne = (req, res, next) => {
-		let oneId = req.params.id
-		console.log(oneId)
-		// find one
-		Model.findOne({_id: mongotypes.ObjectId(oneId)}, (err, doc) => {
-			if (err) throw err
+		// Err -> Sem parametros
+		if (!req.params || !req.params.teamid) {
+			return H.responde(res, 400, {
+				"msg": "Pedido sem parametro: teamid."
+			})
+		}
 
-			res.json(doc)
-			res.end()
-		})
+		// find one
+		Model
+			.findById(req.params.teamid)
+			.exec((err, team) => {
+				// handle err
+				if (err) return H.responde(res, 400, err)
+
+				return H.responde(res, 200, team)
+			})
 	}
 
 	/********************************

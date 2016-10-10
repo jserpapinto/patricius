@@ -51,33 +51,34 @@ const GameSchema = new Schema({
 
 //Model
 const TournamentSchema = new Schema({
-	status: Boolean,
-	name: { 
-		type: String, 
-		index: { 
-			unique: true 
-		}
+		status: Boolean,
+		name: { 
+			type: String, 
+			index: { 
+				unique: true 
+			}
+		}, 
+		type: Number,
+		date: Date,
+		imgs: 
+		[
+			{
+				src: String,
+				primary: Boolean
+			}
+		],
+		teams: [
+			{
+				id: Schema.Types.ObjectId
+			}
+		],
+		games: [GameSchema]
 	}, 
-	type: Number,
-	date: Date,
-	imgs: 
-	[
-		{
-			src: String,
-			order: Number
-		}
-	],
-	teams: [
-		{
-			id: Schema.Types.ObjectId
-		}
-	],
-	games: [GameSchema]
-}, 
-{	// Opções
-	collection: "tournament",
-	timestamps: true
-})
+	{	// Opções
+		timestamps: true
+	})
 
-mongoose.model("Torunament", TournamentSchema)
+let t = mongoose.model("Tournament", TournamentSchema)
+
+module.exports = t
 

@@ -1,9 +1,11 @@
 "use strict"
 // Dependências
 let mongoose = require("mongoose")
-let db = require("../../db")
 // Model
-let Model = mongoose.model('Player')
+let Model = require('../model/player')
+
+// Helper
+let H = require('./helper')
 
 // Factory Function
 const Player = () => {
@@ -12,57 +14,42 @@ const Player = () => {
 	*    GET JSON DE JOGADORES        *
 	********************************/
 	let getAll = (req, res, next) => {
-		Model.find({}, (err, docs) => {
-			// handle err
-			if (err) throw err;
+		// Find all
+		Model
+			.find({})
+			.select('name type position imgs dob cc')
+			.exec((err, playerList) => {
+				// Err -> Bd bad request
+				if (err) return H.responde(res, 400, err)
 
-			// build with name, img0
-			let output = docs.map(
-				(p) => { // p = player
-
-					// get primary image
-					let profileImg = t.imgs.find((img) => {
-							if (img.primary == true) // marked as true
-								return img.src
-						}
-					)
-
-					if (Array.isArray(profileImg)) profileImg = profileImg[0] // se devolver >1 resultado
-					// output obj
-					let newPlayer = {
-						id: t._id.toString(),
-						name: t.name,
-						type: t.type, // 1->Player 2->Coach 3->delegate 4->ref
-						positions: t.position,
-						dob: t.dob,
-						cc: t.cc,
-						img: profileImg,
-					}
-
-					return newPlayer
+				//Err -> Não há torneios na db
+				if (!playerList || playerList.length === 0) {
+					return H.responde(res, 404, {
+						"msg": "Não há jogadores na bd."
+					})
 				}
-			)
-			console.log(output)
-
-			// resposta
-			res.json(output)
-			res.end()
-
-		})
+				
+				return H.responde(res, 200, playerList)
+			})
 	}
 
 	let getOne = (req, res, next) => {
-		let oneId = req.params.id
-		console.log('ID recebido pelo url', oneId)
+		// Err -> Sem parametros
+		if (!req.params || !req.params.playerid) {
+			return H.responde(res, 400, {
+				"msg": "Pedido sem parametro: playerid."
+			})
+		}
+
 		// find one
-		Model.findOne({_id: mongotypes.ObjectId(oneId)}, (err, doc) => {
+		Model
+			.findById(req.params.playerid)
+			.exec((err, player) => {
+				// handle err
+				if (err) return H.responde(res, 400, err)
 
-			if (err) return res.status(500).send({error: err}).end() // returning error and ending
-
-			console.log('Doc do player a enviar na resposta', doc)
-			res.json(doc)
-			res.end()
-		})
+				return H.responde(res, 200, player)
+			})
 	}
 
 	/********************************

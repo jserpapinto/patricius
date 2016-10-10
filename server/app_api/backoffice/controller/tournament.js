@@ -2,12 +2,13 @@
 // Dependências
 let mongoose = require("mongoose")
 let mongotypes = mongoose.Types	
-let db = require("../../db")
 let moment = require("moment")
-let multer = require("multer")
 let path = require("path")
 // Model
-let Model = mongoose.model('Tournament')
+let Model = require('../model/tournament')
+
+// Helper
+let H = require('./helper')
 
 // Date configs
 moment.locale('pt-PT');
@@ -24,45 +25,41 @@ const Tournament = () => {
 	********************************/
 	let getAll = (req, res, next) => {
 		// Find all
-		Model.find({}, (err, docs) => {
-			// handle err
-			if (err) throw err
+		Model
+			.find({})
+			.select('status name type imgs')
+			.exec((err, tournamentList) => {
+				// Err -> Bd bad request
+				if (err) return H.responde(res, 400, err)
 
-			// build with names, tipo, date, imgs
-			let output = docs.map(
-				(t) =>  { // t = tournamnet
+				//Err -> Não há torneios na db
+				if (!tournamentList || tournamentList.length === 0) {
+					return H.responde(res, 404, {
+						"msg": "Não há torneios na bd."
+					})
+				}
 
-					// output obj
-					let newt = {
-						id: t._id.toString(),
-						name: t.name,
-						date: moment(t.date, "DD/MM/YYYY"),
-						type: t.type,
-						imgs: t.imgs
-					}
-
-					return newt
-				} 
-			)
-			console.log(output)
-
-
-			// resposta
-			res.json(output)
-			res.end()
-		})
+				return H.responde(res, 200, tournamentList)
+			})
 	}
 
 	let getOne = (req, res, next) => {
-		let oneId = req.params.id
-		// find one
-		Model.findOne({_id: mongotypes.ObjectId(oneId)}, (err, doc) => {
-			// handle err
-			if (err) throw err
+		// Err -> Sem parametros
+		if (!req.params || !req.params.tournamentid) {
+			return H.responde(res, 400, {
+				"msg": "Pedido sem parametro: touranmentid."
+			})
+		}
 
-			res.json(doc)
-			res.end()
-		})
+		// find one
+		Model
+			.findById(req.params.tournamentid)
+			.exec((err, torneio) => {
+				// handle err
+				if (err) return H.responde(res, 400, err)
+
+				return H.responde(res, 200, torneio)
+			})
 	}
 
 	/********************************

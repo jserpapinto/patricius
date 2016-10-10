@@ -6,16 +6,16 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
+
 // db connection 
-require('./app_server/db')
+require('./app_api/db')
 
 // Routes Front e Back Office
-let routesF = require('./app_server/routes/f');
-let routesB = require('./app_server/routes/backoffice');
+let routesF = require('./app_api/routes/f');
+let routesB = require('./app_api/routes/backoffice');
 
 //Inicia App Express
 let app = express();
-
 
 //ENABLE CORS
 app.use(function(req, res, next) {
@@ -38,13 +38,13 @@ app.use(bodyParser.urlencoded({ extended: false },{limit: '50mb'}));
 // Trata cookies (?)
 app.use(cookieParser());
 // Server conteúdo estático (css, js, imgs)
-app.use(express.static(path.join(__dirname, 'app_server', 'public')));
+app.use(express.static(path.join(__dirname, 'app_api', 'public')));
 
 /*******************
 *    ROUTERS        *
 *******************/
 app.use('/', routesF);
-app.use('/backoffice', routesB);
+app.use('/api', routesB);
 
 /*******************
 *       404         *

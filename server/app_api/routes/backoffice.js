@@ -9,6 +9,7 @@ let path = require("path")
 let tournament = require("../backoffice/controller/tournament")
 let team = require("../backoffice/controller/team")
 let player = require("../backoffice/controller/player")
+let game = require("../backoffice/controller/game")
 
 /* GET users listing. */
 router.get('/', (req, res) => {
@@ -21,81 +22,39 @@ router.get('/', (req, res) => {
 /**************
 *	Tournaments
 ***************/
-router.get("/tournaments", tournament.getAll) // regex pra plural
-router.get("/tournament/:id", tournament.getOne) // traz jogos pralem da tralha toda
-
-
-// upload img tournament
-var storage = multer.diskStorage({ //multers disk storage settings
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '../../public/imgs/tournaments/'))
-        console.log(file)
-    },
-    filename: function (req, file, cb) {
-        var datetimestamp = Date.now();
-        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
-    }
-});
-var upload = multer({ //multer settings
-    storage: storage,
-    fileFilter: function (req, file, cb) {
-	    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) { //
-	       return cb(new Error('Only image files are allowed!'));
-	    }
-	    cb(null, true);
-  	}
-}).single('img') // field name from frontend
-// route
+router.get("/tournament", tournament.getAll) // regex pra plural
+router.get("/tournament/:tournamentid", tournament.getOne) // traz jogos pralem da tralha toda
 router.put("/tournament/upload", tournament.putImg)
-// .upload img tournament
-
 router.post("/tournament", tournament.post)
+router.put("/tournament/:tournamentid", tournament.put)
+router.delete("/tournament/:tournamentid", tournament.delete)
 
-router.put("/tournament/:id", upload, tournament.put)
-router.delete("/tournament/:id", tournament.delete)
-
+/**************
+*	Games
+***************/
+router.get('/tournament/:tournamentid/game/', game.getAllFromTournament)
+router.get('/tournament/:tournamentid/game/:gameid', game.getOne)
 
 
 /**************
 *	Teams
 ***************/
-router.get("/teams", team.getAll)
-router.get("/team/:id", team.getOne)
+router.get("/team", team.getAll)
+router.get("/team/:teamid", team.getOne)
 router.post("/team", team.post)
-router.put("/team/:id", team.put)
-router.delete("/team/:id", team.delete)
+router.put("/team/:teamid", team.put)
+router.delete("/team/:teamid", team.delete)
 
 
 
 /**************
 *	Players
 ***************/
-
-// upload img tournament
-var storage2 = multer.diskStorage({ //multers disk storage settings
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '../../public/imgs/players/'))
-    },
-    filename: function (req, file, cb) {
-        var datetimestamp = Date.now();
-        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
-    }
-});
-var upload2 = multer({ //multer settings
-    storage: storage,
-    fileFilter: function (req, file, cb) {
-	    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) { //
-	       return cb(new Error('Only image files are allowed!'));
-	    }
-	    cb(null, true);
-  	}
-}).single('img') // field name from frontend
-router.get("/players", player.getAll)
-router.get("/player/:id", player.getOne)
-router.post("/player", upload2, player.post)
-router.put("/player/:id", player.put)
-router.delete("/player/:id", player.delete)
-
+router.get("/player", player.getAll)
+router.get("/player/:playerid", player.getOne)
+router.post("/player", player.post)
+router.put("/player/:playerid", player.put)
+router.delete("/player/:playerid", player.delete)
 /********************************
 *    	  	   MENU		        *
 *	- Tournament

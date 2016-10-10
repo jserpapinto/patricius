@@ -4,8 +4,7 @@ let mongoose = require("mongoose")
 let Schema = mongoose.Schema
 
 //Model
-const TeamSchema = new Schema(
-	{
+const TeamSchema = new Schema({
 		name: { 
 			type: String, 
 			index: { 
@@ -16,7 +15,7 @@ const TeamSchema = new Schema(
 		[
 			{
 				src: String,
-				order: Number
+				primary: Boolean
 			}
 		],
 		players: [
@@ -26,9 +25,9 @@ const TeamSchema = new Schema(
 		]
 	}, 
 	{	// Opções
-		collection: "teams",
 		timestamps: true
-	}
-)
+	})
 
-mongoose.model("Team", TeamSchema)
+let t = mongoose.model("Team", TeamSchema)
+
+module.exports = t
